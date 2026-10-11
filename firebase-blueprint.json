@@ -1,0 +1,339 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Student engineering academic profile and career goal configuration.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the student user.",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the engineering student.",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the student.",
+          "maxLength": 150
+        },
+        "branch": {
+          "type": "string",
+          "description": "B.Tech Engineering discipline (CSE, ECE, EEE, MECH, CIVIL, IT, AI_ML, DATA_SCIENCE).",
+          "maxLength": 50
+        },
+        "year": {
+          "type": "number",
+          "description": "Academic study year (1 to 4)."
+        },
+        "semester": {
+          "type": "number",
+          "description": "Current semester number (1 to 8)."
+        },
+        "careerGoal": {
+          "type": "string",
+          "description": "Primary placement aspiration.",
+          "maxLength": 100
+        },
+        "dailyStudyTime": {
+          "type": "string",
+          "description": "Committed daily learning duration.",
+          "maxLength": 50
+        },
+        "timezone": {
+          "type": "string",
+          "description": "Timezone for midnight streak tracking.",
+          "maxLength": 60
+        },
+        "preferredStudySlot": {
+          "type": "string",
+          "description": "Preferred study time block during the day.",
+          "maxLength": 60
+        },
+        "notificationAlerts": {
+          "type": "boolean",
+          "description": "Whether streak and deadline alerts are enabled."
+        },
+        "emailReminders": {
+          "type": "boolean",
+          "description": "Whether email digest reminders are enabled."
+        },
+        "onboarded": {
+          "type": "boolean",
+          "description": "Whether onboarding has been completed."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update."
+        }
+      },
+      "required": ["userId", "name", "email", "branch", "year", "semester", "careerGoal", "onboarded"]
+    },
+    "UserScore": {
+      "title": "UserScore",
+      "description": "Readiness metrics, points tally, and habit streak tracking.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Reference to the student UID.",
+          "maxLength": 128
+        },
+        "totalScore": {
+          "type": "number",
+          "description": "Total placement readiness score points."
+        },
+        "streakDays": {
+          "type": "number",
+          "description": "Consecutive days of verified study or milestone submission."
+        },
+        "streakFreezeAvailable": {
+          "type": "boolean",
+          "description": "Whether a streak freeze protection token is available."
+        },
+        "level": {
+          "type": "string",
+          "description": "Career ladder tier rank.",
+          "maxLength": 50
+        },
+        "lastActiveDate": {
+          "type": "string",
+          "description": "Date string of last verified milestone activity."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last score update."
+        }
+      },
+      "required": ["userId", "totalScore", "streakDays", "level"]
+    },
+    "UserTask": {
+      "title": "UserTask",
+      "description": "Individual student completion and proof verification record for a roadmap milestone.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Student UID owning this task completion record.",
+          "maxLength": 128
+        },
+        "taskId": {
+          "type": "string",
+          "description": "Roadmap curriculum milestone identifier.",
+          "maxLength": 100
+        },
+        "status": {
+          "type": "string",
+          "description": "Progress status of milestone.",
+          "enum": ["not_started", "in_progress", "completed"]
+        },
+        "activeSecondsStudied": {
+          "type": "number",
+          "description": "Total active seconds focused on learning resource."
+        },
+        "quizScore": {
+          "type": "number",
+          "description": "Score achieved in automated verification quiz."
+        },
+        "repoUrl": {
+          "type": "string",
+          "description": "Public GitHub repository URL submitted for proof.",
+          "maxLength": 300
+        },
+        "verifiedAt": {
+          "type": "string",
+          "description": "ISO timestamp when milestone was verified."
+        }
+      },
+      "required": ["userId", "taskId", "status"]
+    },
+    "InternshipApplication": {
+      "title": "InternshipApplication",
+      "description": "Recorded internship recruitment pipeline entry.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Student UID submitting the application.",
+          "maxLength": 128
+        },
+        "company": {
+          "type": "string",
+          "description": "Target company name.",
+          "maxLength": 150
+        },
+        "role": {
+          "type": "string",
+          "description": "Target intern or full-time position.",
+          "maxLength": 150
+        },
+        "appliedDate": {
+          "type": "string",
+          "description": "Date applied."
+        },
+        "sourceUrl": {
+          "type": "string",
+          "description": "Direct application listing link.",
+          "maxLength": 300
+        },
+        "status": {
+          "type": "string",
+          "description": "Current pipeline status.",
+          "enum": ["Wishlist", "Applied", "Interviewing", "Offer Received", "Rejected"]
+        },
+        "notes": {
+          "type": "string",
+          "description": "Personal preparation notes.",
+          "maxLength": 1000
+        }
+      },
+      "required": ["userId", "company", "role", "appliedDate", "status"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User notification, deadline alert, or streak warning.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Student UID receiving alert.",
+          "maxLength": 128
+        },
+        "title": {
+          "type": "string",
+          "description": "Notification title.",
+          "maxLength": 150
+        },
+        "message": {
+          "type": "string",
+          "description": "Notification body content.",
+          "maxLength": 500
+        },
+        "type": {
+          "type": "string",
+          "description": "Alert category.",
+          "enum": ["streak_risk", "deadline", "achievement", "info"]
+        },
+        "read": {
+          "type": "boolean",
+          "description": "Whether notification has been marked read."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of alert."
+        }
+      },
+      "required": ["userId", "title", "message", "type", "read"]
+    },
+    "AdminRole": {
+      "title": "AdminRole",
+      "description": "Designated administrator identity record.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Admin email address.",
+          "maxLength": 150
+        },
+        "role": {
+          "type": "string",
+          "description": "Admin authorization tier.",
+          "maxLength": 50
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of creation."
+        }
+      },
+      "required": ["email", "role"]
+    },
+    "AIRoadmap": {
+      "title": "AIRoadmap",
+      "description": "Personalized AI-generated engineering roadmap and actionable plan for the student.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this roadmap record.",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the student user.",
+          "maxLength": 128
+        },
+        "generatedAt": {
+          "type": "string",
+          "description": "ISO timestamp when the roadmap was synthesized."
+        },
+        "source": {
+          "type": "string",
+          "description": "Origin of the roadmap: 'gemini' or 'curated_fallback'.",
+          "maxLength": 50
+        },
+        "currentPosition": {
+          "type": "object",
+          "description": "Analysis of current student baseline, strengths, and skill gaps."
+        },
+        "phases": {
+          "type": "array",
+          "description": "Sequential learning phases with projects, topics, and exercises."
+        },
+        "immediateActionPlan": {
+          "type": "object",
+          "description": "Actionable steps for today, this week, this month, and next milestone."
+        },
+        "futureOpportunities": {
+          "type": "object",
+          "description": "Post-roadmap career pathways, job roles, and exams."
+        },
+        "topThreeActions": {
+          "type": "array",
+          "description": "Immediate three highest-impact action items."
+        },
+        "progressMeasurement": {
+          "type": "string",
+          "description": "How learning progress and proof of work are tracked."
+        }
+      },
+      "required": ["userId", "generatedAt", "source", "currentPosition", "phases", "immediateActionPlan", "futureOpportunities"]
+    }
+  },
+  "firestore": {
+    "/profiles/{userId}": {
+      "schema": "UserProfile",
+      "description": "Student profile configuration keyed by user UID."
+    },
+    "/scores/{userId}": {
+      "schema": "UserScore",
+      "description": "Placement score and streak data keyed by user UID."
+    },
+    "/roadmaps/{userId}": {
+      "schema": "AIRoadmap",
+      "description": "Personalized AI roadmap document keyed by user UID."
+    },
+    "/tasks/{taskId}": {
+      "schema": "UserTask",
+      "description": "User roadmap progress task records."
+    },
+    "/applications/{applicationId}": {
+      "schema": "InternshipApplication",
+      "description": "Internship tracker pipeline applications."
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "User notifications and deadline reminders."
+    },
+    "/admins/{adminUid}": {
+      "schema": "AdminRole",
+      "description": "Platform administrators and faculty supervisor whitelist."
+    }
+  }
+}

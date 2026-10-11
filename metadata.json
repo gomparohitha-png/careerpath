@@ -1,0 +1,6 @@
+{
+  "name": "CareerPath: Plan • Learn • Grow",
+  "description": "A personalized, year-wise career, skill, project, and placement roadmap platform for B.Tech engineering students with automated proof-of-work completion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
